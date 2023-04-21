@@ -25,7 +25,7 @@
           <legend>Basic Info</legend>
           
           <label for="name">Name: <span class="asterisk">*</span>
-            <input type="text" id="name" name="user-name" class="error-border">
+            <input type="text" id="name" name="user-name" class="error-border js-input-name">
             <span id="name-hint" class="name-hint hint">Name field cannot be blank</span>
           </label>
           
@@ -37,7 +37,7 @@
           
           
           <label for="title">Job Role</label>
-          <select id="title" name="user-title">
+          <select id="title" name="user-title" class="js-job-role">
             <option hidden>Select Job Role</option>
             <option value="full-stack js developer">Full Stack JavaScript Developer</option>
             <option value="front-end developer">Front End Developer</option>
@@ -47,7 +47,7 @@
             <option value="other">Other</option>  
           </select> 
           
-          <input type="text" name="other-job-role" id="other-job-role" class="other-job-role" placeholder="Other job role?">
+          <input type="text" name="other-job-role" id="other-job-role" class="other-job-role js-other-job-role" placeholder="Other job role?">
         </fieldset>
         
         <fieldset class="shirts">
