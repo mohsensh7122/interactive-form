@@ -7,6 +7,7 @@ const jsPunOption = document.querySelector('[value="js puns"]');
 const jsHeartOption = document.querySelector('[value="heart js"]');
 const jsPuns = document.querySelectorAll('[data-theme="js puns"]');
 const jsHearts = document.querySelectorAll('[data-theme="heart js"]');
+const activitiesField = document.querySelector('#activities');
 
 // Focuses on the name input once the page loads
 nameInput.focus();
@@ -61,4 +62,40 @@ designMenu.addEventListener('change', e => {
             jsHeart.style.display = 'block';
         })
     }
+})
+
+
+
+
+
+/** The "Register for Activities" section **/
+
+
+activitiesField.addEventListener('change', e => {
+    // Grabs all the checkboxes in the activities fieldset
+    const checkboxes = document.querySelectorAll('.activities input');
+    
+    // The total cost of the activites will be initially 0
+    let totalCost = 0;
+    
+    
+
+    // Loops through the checkbox
+
+    checkboxes.forEach(checkbox => {
+
+        const checkboxCost = +checkbox.getAttribute('data-cost');
+        // Checkes if the checkbox is checked
+        if(checkbox.checked){
+            totalCost += checkboxCost;
+            if (!checkbox.checked) {
+                totalCost -= checkboxCost;
+            }
+        } 
+
+        document.getElementById('activities-cost').innerHTML = `Total: $${totalCost}`
+    })
+
+    // document.getElementById('activities-cost').textContent = totalCost;
+
 })
