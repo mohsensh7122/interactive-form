@@ -8,6 +8,21 @@ const jsHeartOption = document.querySelector('[value="heart js"]');
 const jsPuns = document.querySelectorAll('[data-theme="js puns"]');
 const jsHearts = document.querySelectorAll('[data-theme="heart js"]');
 const activitiesField = document.querySelector('#activities');
+const paymentSelect = document.querySelector('#payment');
+const creditcardDiv = document.getElementById('credit-card');
+const paypalDiv = document.getElementById('paypal');
+const bitcoinDiv = document.getElementById('bitcoin');
+
+
+// Used the "paypal" and "bitcoin" variables above to hide those elements initially.
+
+paypalDiv.style.display = 'none';
+bitcoinDiv.style.display = 'none';
+
+// Used the paymentSelect variable above to target the element’s second child element and gave it the selected property.
+paymentSelect.children[1].setAttribute("selected", "selected");;
+
+
 
 // Focuses on the name input once the page loads
 nameInput.focus();
@@ -85,9 +100,10 @@ activitiesField.addEventListener('change', e => {
     checkboxes.forEach(checkbox => {
 
         const checkboxCost = +checkbox.getAttribute('data-cost');
-        // Checkes if the checkbox is checked
+        // Checkes if the checkbox is checked and adds the cost to the total amount
         if(checkbox.checked){
             totalCost += checkboxCost;
+            // Checkes if the checkbox is unchecked and deducts the cost from the total amount
             if (!checkbox.checked) {
                 totalCost -= checkboxCost;
             }
@@ -96,6 +112,23 @@ activitiesField.addEventListener('change', e => {
         document.getElementById('activities-cost').innerHTML = `Total: $${totalCost}`
     })
 
-    // document.getElementById('activities-cost').textContent = totalCost;
+
+})
+
+
+
+/** The "Payment Info" section **/
+
+paymentSelect.addEventListener('change', e => {
+
+    const selctedOption = e.target.value;
+
+    // Used the payment variables to listen for the change event on this element. When a change is detected, display the <div> element with the id that matches the value of the event.target element. And hide the other two <div> elements.
+
+    creditcardDiv.style.display = 'none';
+    paypalDiv.style.display = 'none';
+    bitcoinDiv.style.display = 'none';
+
+    document.getElementById(`${selctedOption}`).style.display = 'block';
 
 })
