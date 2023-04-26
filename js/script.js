@@ -1,4 +1,5 @@
 const nameInput = document.querySelector('.js-input-name');
+const emailInput = document.querySelector('.js-input-email');
 const otherRole = document.querySelector('.js-other-job-role');
 const selectJobRole = document.querySelector('.js-job-role');
 const colorMenu = document.querySelector('.js-color-menu');
@@ -12,7 +13,12 @@ const paymentSelect = document.querySelector('#payment');
 const creditcardDiv = document.getElementById('credit-card');
 const paypalDiv = document.getElementById('paypal');
 const bitcoinDiv = document.getElementById('bitcoin');
+const form = document.querySelector('form');
+let activitiesTotal = 0;
 
+document.querySelector('#activities').addEventListener('change', e => {
+    (e.target.checked) ? activitiesTotal++ : activitiesTotal--;
+  });
 
 // Used the "paypal" and "bitcoin" variables above to hide those elements initially.
 
@@ -131,4 +137,64 @@ paymentSelect.addEventListener('change', e => {
 
     document.getElementById(`${selctedOption}`).style.display = 'block';
 
+})
+
+
+
+
+/** The "Form validation" section **/
+
+const nameValidator = () => {
+
+    const nameValue = nameInput.value;
+
+    console.log("Name value is: ", `"${nameValue}"`);
+
+    const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
+    console.log(`Name validation test on "${nameValue}" evaluates to ${nameIsValid}`);
+
+
+
+  return nameIsValid;
+
+
+}
+
+const emailValidator = () => {
+
+    const emailValue = emailInput.value;
+
+    console.log("Email value is: ", `"${emailValue}"`);
+
+    const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
+    console.log(`Email validation test on "${emailValue}" evaluates to ${emailIsValid}`);
+    
+
+
+    return emailIsValid;
+
+}
+
+const activityValidator = () => {
+
+    const activitiesSectionIsValid = activitiesTotal > 0;
+    console.log(`Activities section validation test evaluates to ${activitiesSectionIsValid}`);
+
+
+    return activitiesSectionIsValid;
+
+}
+
+const cardValidator = () => {
+    
+}
+
+form.addEventListener('submit', e => {
+
+    nameValidator();
+    emailValidator();
+    activityValidator();
+
+    // Will have to remove this
+    e.preventDefault();
 })
