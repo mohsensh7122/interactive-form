@@ -240,10 +240,17 @@ form.addEventListener('submit', e => {
     nameValidator();
     emailValidator();
     activityValidator();
-    cardValidator();
-    zipCodeValidator();
-    cvvValidator();
+
+    if(creditcardDiv.style.display === 'block'){
+        cardValidator();
+        zipCodeValidator();
+        cvvValidator();
+    }
+    
 
     // Will have to remove this
-    e.preventDefault();
+
+    if(!nameValidator() || !emailValidator() || !activityValidator() || !cardValidator() || !zipCodeValidator() || !cvvValidator()){
+        e.preventDefault();
+    }
 })
