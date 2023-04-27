@@ -14,6 +14,9 @@ const creditcardDiv = document.getElementById('credit-card');
 const paypalDiv = document.getElementById('paypal');
 const bitcoinDiv = document.getElementById('bitcoin');
 const form = document.querySelector('form');
+const ccInput = document.getElementById('cc-num');
+const zipInput = document.getElementById('zip');
+const cvvInput = document.getElementById('cvv');
 let activitiesTotal = 0;
 
 document.querySelector('#activities').addEventListener('change', e => {
@@ -186,14 +189,60 @@ const activityValidator = () => {
 }
 
 const cardValidator = () => {
+
+    const ccValue = ccInput.value;
+
+    console.log("CC Value is: ", `"${ccValue}"`);
+
+    const ccIsValid = /\d{13,16}/i.test(ccValue);
+    console.log(`CC validation test on "${ccValue}" evaluates to ${ccIsValid}`);
+    
+
+
+    return ccIsValid;
     
 }
+
+
+const zipCodeValidator = () => {
+
+    const zipCodeValue = zipInput.value;
+
+    console.log("Zip Code Value is: ", `"${zipCodeValue}"`);
+
+    const zipcodeIsValid = /\d{5}/i.test(zipCodeValue);
+    console.log(`Zip Code validation test on "${zipCodeValue}" evaluates to ${zipcodeIsValid}`);
+    
+
+
+    return zipcodeIsValid;
+    
+}
+
+
+const cvvValidator = () => {
+
+    const cvvValue = cvvInput.value;
+
+    console.log("CVV Value is: ", `"${cvvValue}"`);
+
+
+    const cvvIsValid = /\d{3}/i.test(cvvValue);
+    console.log(`Zip Code validation test on "${cvvValue}" evaluates to ${cvvIsValid}`);
+
+    return cvvIsValid;
+
+}
+
 
 form.addEventListener('submit', e => {
 
     nameValidator();
     emailValidator();
     activityValidator();
+    cardValidator();
+    zipCodeValidator();
+    cvvValidator();
 
     // Will have to remove this
     e.preventDefault();
