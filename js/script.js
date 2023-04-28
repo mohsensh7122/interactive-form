@@ -17,6 +17,7 @@ const form = document.querySelector('form');
 const ccInput = document.getElementById('cc-num');
 const zipInput = document.getElementById('zip');
 const cvvInput = document.getElementById('cvv');
+const checkboxInputs = document.querySelectorAll('input[type="checkbox"]');
 let activitiesTotal = 0;
 
 document.querySelector('#activities').addEventListener('change', e => {
@@ -151,11 +152,22 @@ const nameValidator = () => {
 
     const nameValue = nameInput.value;
 
+    
+
     console.log("Name value is: ", `"${nameValue}"`);
 
     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
     console.log(`Name validation test on "${nameValue}" evaluates to ${nameIsValid}`);
 
+    if(!nameIsValid){
+        nameInput.parentElement.classList.add('not-valid');
+        nameInput.parentElement.classList.remove('valid');
+        nameInput.parentElement.lastElementChild.style.display = 'block';
+    } else {
+        nameInput.parentElement.classList.add('valid');
+        nameInput.parentElement.classList.remove('not-valid');
+        nameInput.parentElement.lastElementChild.style.display = 'none';
+    }
 
 
   return nameIsValid;
@@ -172,7 +184,11 @@ const emailValidator = () => {
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
     console.log(`Email validation test on "${emailValue}" evaluates to ${emailIsValid}`);
     
-
+    if(!emailIsValid){
+        emailInput.parentElement.classList.add('not-valid');
+        emailInput.parentElement.classList.remove('valid');
+        emailInput.parentElement.lastElementChild.style.display = 'block';
+    }
 
     return emailIsValid;
 
@@ -241,16 +257,34 @@ form.addEventListener('submit', e => {
     emailValidator();
     activityValidator();
 
+
+   
+
     if(creditcardDiv.style.display === 'block'){
         cardValidator();
         zipCodeValidator();
         cvvValidator();
     }
     
-
-    // Will have to remove this
-
     if(!nameValidator() || !emailValidator() || !activityValidator() || !cardValidator() || !zipCodeValidator() || !cvvValidator()){
         e.preventDefault();
     }
 })
+
+
+/** Accessibility Adjustments **/
+
+
+checkboxInputs.forEach(checkboxInput => {
+
+    checkboxInput.addEventListener('focus', function(){
+        checkboxInput.parentElement.classList.add('focus');
+    })
+
+    checkboxInput.addEventListener('blur', function(){
+        checkboxInput.parentElement.classList.remove('focus');
+    })
+
+
+})
+
