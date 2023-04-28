@@ -188,6 +188,10 @@ const emailValidator = () => {
         emailInput.parentElement.classList.add('not-valid');
         emailInput.parentElement.classList.remove('valid');
         emailInput.parentElement.lastElementChild.style.display = 'block';
+    } else {
+        emailInput.parentElement.classList.add('valid');
+        emailInput.parentElement.classList.remove('not-valid');
+        emailInput.parentElement.lastElementChild.style.display = 'none';
     }
 
     return emailIsValid;
@@ -198,6 +202,16 @@ const activityValidator = () => {
 
     const activitiesSectionIsValid = activitiesTotal > 0;
     console.log(`Activities section validation test evaluates to ${activitiesSectionIsValid}`);
+
+    if(!activitiesSectionIsValid){
+        activitiesField.classList.add('not-valid');
+        activitiesField.classList.remove('valid');
+        activitiesField.lastElementChild.style.display = 'block';
+    } else {
+        activitiesField.classList.add('valid');
+        activitiesField.classList.remove('not-valid');
+        activitiesField.lastElementChild.style.display = 'none';
+    }
 
 
     return activitiesSectionIsValid;
@@ -213,6 +227,16 @@ const cardValidator = () => {
     const ccIsValid = /\d{13,16}/i.test(ccValue);
     console.log(`CC validation test on "${ccValue}" evaluates to ${ccIsValid}`);
     
+    // Causing an error
+    // if(!ccIsValid){
+    //     ccInput.parentElement.classList.add('not-valid');
+    //     ccInput.parentElement.classList.remove('valid');
+    //     ccInput.parentElement.lastChild.style.display = 'block';
+    // } else {
+    //     ccInput.parentElement.classList.add('valid');
+    //     ccInput.parentElement.classList.remove('not-valid');
+    //     ccInput.parentElement.lastChild.style.display = 'none';
+    // }
 
 
     return ccIsValid;
@@ -256,7 +280,7 @@ form.addEventListener('submit', e => {
     nameValidator();
     emailValidator();
     activityValidator();
-
+    cardValidator();
 
    
 
@@ -288,3 +312,11 @@ checkboxInputs.forEach(checkboxInput => {
 
 })
 
+
+
+
+/** Real-time error message **/
+
+nameInput.addEventListener('keyup', nameValidator);
+emailInput.addEventListener('keyup', emailValidator);
+activitiesField.addEventListener('keyup', activityValidator)
