@@ -102,7 +102,28 @@ activitiesField.addEventListener('change', e => {
     
     // The total cost of the activites will be initially 0
     let totalCost = 0;
+
+
+    // Prevents the user from selecting conflicting activities
     
+    const clicked = e.target;
+    const clickedTime = clicked.getAttribute('data-day-and-time');
+
+    console.log(clicked);
+    console.log(clickedTime);
+
+    checkboxes.forEach(checkbox => {
+        const checkboxType = checkbox.getAttribute('data-day-and-time');
+        if (checkboxType === clickedTime && clicked !== checkbox){
+          if(clicked.checked){
+            checkbox.disabled = true;
+            checkbox.parentElement.classList.add('disabled');
+          } else {
+            checkbox.disabled = false;
+            checkbox.parentElement.classList.remove('disabled');
+          }
+        }
+    });
     
 
     // Loops through the checkbox
@@ -121,6 +142,9 @@ activitiesField.addEventListener('change', e => {
 
         document.getElementById('activities-cost').innerHTML = `Total: $${totalCost}`
     })
+
+
+    // Prevents users from registering for conflicting activities
 
 
 })
