@@ -227,16 +227,15 @@ const cardValidator = () => {
     const ccIsValid = /\d{13,16}/i.test(ccValue);
     console.log(`CC validation test on "${ccValue}" evaluates to ${ccIsValid}`);
     
-    // Causing an error
-    // if(!ccIsValid){
-    //     ccInput.parentElement.classList.add('not-valid');
-    //     ccInput.parentElement.classList.remove('valid');
-    //     ccInput.parentElement.lastChild.style.display = 'block';
-    // } else {
-    //     ccInput.parentElement.classList.add('valid');
-    //     ccInput.parentElement.classList.remove('not-valid');
-    //     ccInput.parentElement.lastChild.style.display = 'none';
-    // }
+    if(!ccIsValid){
+        ccInput.parentElement.classList.add('not-valid');
+        ccInput.parentElement.classList.remove('valid');
+        ccInput.parentElement.lastElementChild.style.display = 'block';
+    } else {
+        ccInput.parentElement.classList.add('valid');
+        ccInput.parentElement.classList.remove('not-valid');
+        ccInput.parentElement.lastElementChild.style.display = 'block';
+    }
 
 
     return ccIsValid;
@@ -253,7 +252,15 @@ const zipCodeValidator = () => {
     const zipcodeIsValid = /\d{5}/i.test(zipCodeValue);
     console.log(`Zip Code validation test on "${zipCodeValue}" evaluates to ${zipcodeIsValid}`);
     
-
+    if(!zipcodeIsValid){
+        zipInput.parentElement.classList.add('not-valid');
+        zipInput.parentElement.classList.remove('valid');
+        zipInput.parentElement.lastElementChild.style.display = 'block';
+    } else {
+        zipInput.parentElement.classList.add('valid');
+        zipInput.parentElement.classList.remove('not-valid');
+        zipInput.parentElement.lastElementChild.style.display = 'none';
+    }
 
     return zipcodeIsValid;
     
@@ -270,6 +277,16 @@ const cvvValidator = () => {
     const cvvIsValid = /\d{3}/i.test(cvvValue);
     console.log(`Zip Code validation test on "${cvvValue}" evaluates to ${cvvIsValid}`);
 
+    if(!cvvIsValid){
+        cvvInput.parentElement.classList.add('not-valid');
+        cvvInput.parentElement.classList.remove('valid');
+        cvvInput.parentElement.lastElementChild.style.display = 'block';
+    } else {
+        cvvInput.parentElement.classList.add('valid');
+        cvvInput.parentElement.classList.remove('not-valid');
+        cvvInput.parentElement.lastElementChild.style.display = 'none';
+    }
+
     return cvvIsValid;
 
 }
@@ -281,6 +298,8 @@ form.addEventListener('submit', e => {
     emailValidator();
     activityValidator();
     cardValidator();
+    zipCodeValidator();
+    cvvValidator();
 
    
 
@@ -319,4 +338,7 @@ checkboxInputs.forEach(checkboxInput => {
 
 nameInput.addEventListener('keyup', nameValidator);
 emailInput.addEventListener('keyup', emailValidator);
-activitiesField.addEventListener('keyup', activityValidator)
+activitiesField.addEventListener('keyup', activityValidator);
+ccInput.addEventListener('keyup', cardValidator);
+zipInput.addEventListener('keyup', zipCodeValidator);
+cvvInput.addEventListener('keyup', cvvValidator);
