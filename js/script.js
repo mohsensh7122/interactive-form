@@ -206,6 +206,8 @@ const nameValidator = () => {
     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
     console.log(`Name validation test on "${nameValue}" evaluates to ${nameIsValid}`);
 
+    // If the name input is invalid, it will show the user what is wrong
+
     if(!nameIsValid){
         nameInput.parentElement.classList.add('not-valid');
         nameInput.parentElement.classList.remove('valid');
@@ -231,10 +233,20 @@ const emailValidator = () => {
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
     console.log(`Email validation test on "${emailValue}" evaluates to ${emailIsValid}`);
     
-    if(!emailIsValid){
+    // If the email input is invalid and empty, it will let the user know what is exactly wrong
+    if(!emailIsValid && emailValue == ''){
         emailInput.parentElement.classList.add('not-valid');
         emailInput.parentElement.classList.remove('valid');
-        emailInput.parentElement.lastElementChild.style.display = 'block';
+        document.getElementById('email-hint-2').style.display = 'none';
+        document.getElementById('email-hint').style.display = 'block';
+    } else if (!emailIsValid){
+
+        // If the email input is just invalid (the formatting is incorrect), it will show a different error
+
+        emailInput.parentElement.classList.add('not-valid');
+        emailInput.parentElement.classList.remove('valid');
+        document.getElementById('email-hint').style.display = 'none';
+        document.getElementById('email-hint-2').style.display = 'block';
     } else {
         emailInput.parentElement.classList.add('valid');
         emailInput.parentElement.classList.remove('not-valid');
@@ -344,19 +356,24 @@ form.addEventListener('submit', e => {
     nameValidator();
     emailValidator();
     activityValidator();
-    cardValidator();
-    zipCodeValidator();
-    cvvValidator();
 
-   
-
-    if(creditcardDiv.style.display === 'block'){
+    if(paypalDiv.style.display == 'none' && bitcoinDiv.style.display == 'none'){
         cardValidator();
-        zipCodeValidator();
         cvvValidator();
+        zipCodeValidator();
+    }
+   
+    // Only if the credit card option is selected, the validators associated to it will run
+
+
+    if(paypalDiv.style.display == 'none' && bitcoinDiv.style.display == 'none'){
+        if(!cardValidator() || !cvvValidator() || !zipCodeValidator()){
+            e.preventDefault();
+        }
+        
     }
     
-    if(!nameValidator() || !emailValidator() || !activityValidator() || !cardValidator() || !zipCodeValidator() || !cvvValidator()){
+    if(!nameValidator() || !emailValidator() || !activityValidator()){
         e.preventDefault();
     }
 })
@@ -385,7 +402,7 @@ checkboxInputs.forEach(checkboxInput => {
 
 nameInput.addEventListener('keyup', nameValidator);
 emailInput.addEventListener('keyup', emailValidator);
-activitiesField.addEventListener('keyup', activityValidator);
+activitiesField.addEventListener('change', activityValidator);
 ccInput.addEventListener('keyup', cardValidator);
 zipInput.addEventListener('keyup', zipCodeValidator);
 cvvInput.addEventListener('keyup', cvvValidator);
