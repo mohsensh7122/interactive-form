@@ -63,19 +63,42 @@ colorMenu.disabled = true;
 designMenu.addEventListener('change', e => {
     // enables the color menu once the user selects a design option
 
+    const options = document.querySelectorAll('#shirt-colors option');
+
     colorMenu.disabled = false;
 
     // if the user selects the js puns optioin, it shows only the colors associated with the design and hides the rest
     if (e.target.value.toLowerCase() === 'js puns'){
+
+        // The loop below goes through all options in the color menu if the user changes the theme and deselects all options and then selects the first default option
+
+        for(let i = 0; i < options.length; i++){
+            options[i].removeAttribute('selected', 'selected')
+            options[0].setAttribute('selected', 'selected')
+        }
+
         jsHearts.forEach(jsHeart => {
             jsHeart.style.display = 'none';
+            
         })
 
         jsPuns.forEach(jsPun => {
             jsPun.style.display = 'block';
+
+            
+            
+            
         })
         
     } else {
+
+
+        // The loop below goes through all options in the color menu if the user changes the theme and deselects all options and then selects the first default option
+
+        for(let i = 0; i < options.length; i++){
+            options[i].removeAttribute('selected', 'selected')
+            options[0].setAttribute('selected', 'selected')
+        }
 
         // if the user selects the js hearts optioin, it shows only the colors associated with the design and hides the rest
 
