@@ -293,7 +293,7 @@ const cardValidator = () => {
     } else {
         ccInput.parentElement.classList.add('valid');
         ccInput.parentElement.classList.remove('not-valid');
-        ccInput.parentElement.lastElementChild.style.display = 'block';
+        ccInput.parentElement.lastElementChild.style.display = 'none';
     }
 
 
