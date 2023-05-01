@@ -308,7 +308,7 @@ const zipCodeValidator = () => {
 
     console.log("Zip Code Value is: ", `"${zipCodeValue}"`);
 
-    const zipcodeIsValid = /\d{5}/i.test(zipCodeValue);
+    const zipcodeIsValid = /^[0-9]{5}$/i.test(zipCodeValue);
     console.log(`Zip Code validation test on "${zipCodeValue}" evaluates to ${zipcodeIsValid}`);
     
     if(!zipcodeIsValid){
@@ -333,7 +333,7 @@ const cvvValidator = () => {
     console.log("CVV Value is: ", `"${cvvValue}"`);
 
 
-    const cvvIsValid = /\d{3}/i.test(cvvValue);
+    const cvvIsValid = /^[0-9]{3}$/i.test(cvvValue);
     console.log(`Zip Code validation test on "${cvvValue}" evaluates to ${cvvIsValid}`);
 
     if(!cvvIsValid){
